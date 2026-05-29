@@ -1,47 +1,74 @@
-# CityPilot 🏙️
+# CityPilot 🏙️  
+## AI-Powered Relocation Assistant for New City Movers
 
-AI-powered relocation assistant that helps users move to a new city with confidence.
+CityPilot is a mobile application that helps people moving to a new city choose the best area to live based on rent, food cost, safety, metro availability, salary, budget, and estimated monthly savings.
 
-## Problem
+This project is currently in the **MVP development stage**.
 
-People moving to a new city struggle with:
+---
 
-* Finding affordable accommodation
-* Understanding living costs
-* Choosing safe neighborhoods
-* Estimating commute time
-* Discovering transport options
+## 📌 Project Overview
 
-## Solution
+When students, freshers, interns, or working professionals move to a new city, they face many common problems:
 
-CityPilot provides:
+- Where should I stay?
+- Which area is affordable?
+- What is the average rent?
+- How much will food cost monthly?
+- Is the area safe?
+- Is metro or public transport available?
+- Can I manage expenses with my salary?
+- How much money can I save every month?
 
-* Area recommendations
-* Rent estimates
-* Food cost estimates
-* Safety ratings
-* Metro and transport information
-* AI-powered city guidance
+Most people search on Google, YouTube, Reddit, brokers, PG websites, and WhatsApp groups. The information is scattered, confusing, and sometimes unreliable.
 
-## Tech Stack
+CityPilot solves this problem by giving simple relocation guidance in one place.
 
-### Frontend
+---
 
-* React Native
-* Expo
-* TypeScript
+## 💡 Problem Statement
 
-### Data
+People moving to a new city do not have clear local knowledge about living costs, safe areas, transport, and accommodation options.
 
-* JSON datasets
+For example, if someone gets a job in **Whitefield, Bangalore**, they may not know:
 
-### Future
+- Whether Whitefield is affordable
+- How much PG rent costs
+- Whether metro is available
+- How much monthly food expense will be
+- Whether their salary is enough
+- Which nearby area is better for their budget
 
-* AI Recommendations
-* City Cost Calculator
-* PG & Rental Finder
-* Job Relocation Assistant
+CityPilot helps users make better relocation decisions.
 
-## Current Status
+---
 
-MVP Development in Progress 🚀
+## ✅ Solution
+
+CityPilot allows users to enter:
+
+- City
+- Office location / preferred area
+- Monthly salary
+- Rent budget
+
+Based on this input, the app recommends suitable living areas and displays:
+
+- Recommended area
+- Rent estimate
+- Food cost estimate
+- Safety rating
+- Metro availability
+- Estimated monthly savings
+
+---
+
+## 🎯 Example Use Case
+
+### User Input
+
+```text
+City: Bangalore
+Office Location: Whitefield
+Monthly Salary: ₹30,000
+Rent Budget: ₹10,000
