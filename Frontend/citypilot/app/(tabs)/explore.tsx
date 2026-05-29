@@ -10,15 +10,23 @@ export default function AIAssistantScreen() {
   const [result, setResult] = useState<any>(null);
 
   const generatePlan = () => {
-  const match = bangaloreData.find(
-  (item) =>
-    item.area.toLowerCase().includes(
-      office.toLowerCase().trim()
-    )
-);
+  const searchText = office.toLowerCase().trim().replace(/\s/g, "");
+
+  const match = bangaloreData.find((item) =>
+    item.area.toLowerCase().replace(/\s/g, "").includes(searchText)
+  );
 
   if (match) {
-    setResult(match);
+    const rentValue = parseInt(match.rent.split("-")[0]);
+    const foodValue = parseInt(match.food);
+    const salaryValue = parseInt(salary);
+
+    const savings = salaryValue - rentValue - foodValue;
+
+    setResult({
+      ...match,
+      savings: savings,
+    });
   } else {
     setResult({
       area: "Not Found",
@@ -26,6 +34,7 @@ export default function AIAssistantScreen() {
       food: "-",
       safety: "-",
       metro: "-",
+      savings: "-",
     });
   }
 };
@@ -53,6 +62,7 @@ export default function AIAssistantScreen() {
           <Text>Food Cost: ₹{result.food}/month</Text>
           <Text>Safety: {result.safety}</Text>
           <Text>Metro: {result.metro}</Text>
+          <Text>💰 Savings: ₹{result.savings}/month</Text>
         </View>
       )}
     </ScrollView>
