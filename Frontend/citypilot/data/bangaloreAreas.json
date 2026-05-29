@@ -1,0 +1,72 @@
+[
+  {
+    "area": "Whitefield",
+    "rent": "8000-10000",
+    "food": "3000",
+    "safety": "Good",
+    "metro": "Available"
+  },
+  {
+    "area": "HSR Layout",
+    "rent": "10000-12000",
+    "food": "3500",
+    "safety": "Very Good",
+    "metro": "Nearby"
+  },
+  {
+    "area": "Electronic City",
+    "rent": "7000-9000",
+    "food": "3000",
+    "safety": "Good",
+    "metro": "No"
+  },
+  {
+    "area": "Koramangala",
+    "rent": "12000-15000",
+    "food": "4000",
+    "safety": "Very Good",
+    "metro": "Nearby"
+  },
+  {
+    "area": "Marathahalli",
+    "rent": "9000-11000",
+    "food": "3500",
+    "safety": "Good",
+    "metro": "Available"
+  },
+  {
+    "area": "BTM Layout",
+    "rent": "8000-10000",
+    "food": "3200",
+    "safety": "Good",
+    "metro": "Nearby"
+  },
+  {
+    "area": "Indiranagar",
+    "rent": "15000-20000",
+    "food": "4500",
+    "safety": "Excellent",
+    "metro": "Available"
+  },
+  {
+    "area": "Bellandur",
+    "rent": "9000-12000",
+    "food": "3500",
+    "safety": "Good",
+    "metro": "No"
+  },
+  {
+    "area": "Hebbal",
+    "rent": "10000-13000",
+    "food": "3500",
+    "safety": "Good",
+    "metro": "Nearby"
+  },
+  {
+    "area": "Yelahanka",
+    "rent": "7000-9000",
+    "food": "3000",
+    "safety": "Good",
+    "metro": "No"
+  }
+]

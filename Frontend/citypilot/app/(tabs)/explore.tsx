@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ScrollView, View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import bangaloreData from "../../data/bangaloreAreas.json";
 
 export default function AIAssistantScreen() {
   const [city, setCity] = useState("");
@@ -9,16 +10,25 @@ export default function AIAssistantScreen() {
   const [result, setResult] = useState<any>(null);
 
   const generatePlan = () => {
-    const data = {
-      area: office || "Whitefield",
-      rent: "8000-10000",
-      food: "3000",
-      safety: "Good",
-      metro: "Available",
-    };
+  const match = bangaloreData.find(
+  (item) =>
+    item.area.toLowerCase().includes(
+      office.toLowerCase().trim()
+    )
+);
 
-    setResult(data);
-  };
+  if (match) {
+    setResult(match);
+  } else {
+    setResult({
+      area: "Not Found",
+      rent: "-",
+      food: "-",
+      safety: "-",
+      metro: "-",
+    });
+  }
+};
 
   return (
     <ScrollView style={styles.container}>
