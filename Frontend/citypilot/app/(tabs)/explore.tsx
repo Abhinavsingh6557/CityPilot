@@ -56,25 +56,31 @@ export default function AIAssistantScreen() {
         const foodValue = parseInt(item.food);
         const savings = salaryValue - minRent - foodValue;
 
-        let score = 0;
+        const rentScore = minRent <= budgetValue ? 40 : 0;
 
-        if (minRent <= budgetValue) score += 40;
+        let savingsScore = 5;
+        if (savings > 20000) savingsScore = 25;
+        else if (savings > 10000) savingsScore = 15;
 
-        if (savings > 20000) score += 25;
-        else if (savings > 10000) score += 15;
-        else score += 5;
+        let safetyScore = 0;
+        if (item.safety === "Excellent") safetyScore = 20;
+        else if (item.safety === "Very Good") safetyScore = 15;
+        else if (item.safety === "Good") safetyScore = 10;
 
-        if (item.safety === "Excellent") score += 20;
-        else if (item.safety === "Very Good") score += 15;
-        else if (item.safety === "Good") score += 10;
+        let metroScore = 0;
+        if (item.metro === "Available") metroScore = 10;
+        else if (item.metro === "Nearby") metroScore = 7;
 
-        if (item.metro === "Available") score += 10;
-        else if (item.metro === "Nearby") score += 7;
+        const score = rentScore + savingsScore + safetyScore + metroScore;
 
         return {
           ...item,
           score,
           savings,
+          rentScore,
+          savingsScore,
+          safetyScore,
+          metroScore,
         };
       })
       .sort((a: any, b: any) => b.score - a.score)
@@ -144,7 +150,16 @@ export default function AIAssistantScreen() {
             🏆 #{index + 1} {item.area}
           </Text>
 
-          <Text style={styles.score}>⭐ Score: {item.score}/95</Text>
+          <Text style={styles.score}>
+            ⭐ Relocation Score: {item.score}/95
+          </Text>
+
+          <View style={styles.scoreBox}>
+            <Text>🏠 Affordability: {item.rentScore}/40</Text>
+            <Text>💰 Savings: {item.savingsScore}/25</Text>
+            <Text>🛡️ Safety: {item.safetyScore}/20</Text>
+            <Text>🚇 Metro: {item.metroScore}/10</Text>
+          </View>
 
           <Text style={styles.savings}>
             💰 Savings: ₹{item.savings}/month
@@ -250,6 +265,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#2563EB",
     marginBottom: 8,
+  },
+
+  scoreBox: {
+    marginBottom: 12,
+    padding: 10,
+    backgroundColor: "#F0F9FF",
+    borderRadius: 8,
   },
 
   savings: {
