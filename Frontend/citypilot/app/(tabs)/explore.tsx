@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { ScrollView, View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import {
+  ScrollView,
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
+
 import bangaloreData from "../../data/bangaloreAreas.json";
 
 export default function AIAssistantScreen() {
@@ -7,64 +15,85 @@ export default function AIAssistantScreen() {
   const [office, setOffice] = useState("");
   const [salary, setSalary] = useState("");
   const [budget, setBudget] = useState("");
-  const [result, setResult] = useState<any>(null);
+  const [results, setResults] = useState<any[]>([]);
 
   const generatePlan = () => {
-  const searchText = office.toLowerCase().trim().replace(/\s/g, "");
-
-  const match = bangaloreData.find((item) =>
-    item.area.toLowerCase().replace(/\s/g, "").includes(searchText)
-  );
-
-  if (match) {
-    const rentValue = parseInt(match.rent.split("-")[0]);
-    const foodValue = parseInt(match.food);
+    const budgetValue = parseInt(budget);
     const salaryValue = parseInt(salary);
 
-    const savings = salaryValue - rentValue - foodValue;
+    const filteredAreas = bangaloreData
+      .filter((item: any) => {
+        const minRent = parseInt(item.rent.split("-")[0]);
+        return minRent <= budgetValue;
+      })
+      .sort((a: any, b: any) => b.score - a.score)
+      .slice(0, 3)
+      .map((item: any) => {
+        const minRent = parseInt(item.rent.split("-")[0]);
+        const foodValue = parseInt(item.food);
+        const savings = salaryValue - minRent - foodValue;
 
-    setResult({
-      ...match,
-      savings: savings,
-    });
-  } else {
-    setResult({
-      area: "Not Found",
-      rent: "-",
-      food: "-",
-      safety: "-",
-      metro: "-",
-      savings: "-",
-    });
-  }
-};
+        return {
+          ...item,
+          savings,
+        };
+      });
+
+    setResults(filteredAreas);
+  };
 
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>🤖 CityPilot AI Assistant</Text>
 
-      <TextInput style={styles.input} placeholder="Enter City (e.g. Bangalore)" value={city} onChangeText={setCity} />
+      <TextInput
+        style={styles.input}
+        placeholder="Enter City (e.g. Bangalore)"
+        value={city}
+        onChangeText={setCity}
+      />
 
-      <TextInput style={styles.input} placeholder="Office Location" value={office} onChangeText={setOffice} />
+      <TextInput
+        style={styles.input}
+        placeholder="Office Location"
+        value={office}
+        onChangeText={setOffice}
+      />
 
-      <TextInput style={styles.input} placeholder="Monthly Salary" keyboardType="numeric" value={salary} onChangeText={setSalary} />
+      <TextInput
+        style={styles.input}
+        placeholder="Monthly Salary"
+        keyboardType="numeric"
+        value={salary}
+        onChangeText={setSalary}
+      />
 
-      <TextInput style={styles.input} placeholder="Rent Budget" keyboardType="numeric" value={budget} onChangeText={setBudget} />
+      <TextInput
+        style={styles.input}
+        placeholder="Rent Budget"
+        keyboardType="numeric"
+        value={budget}
+        onChangeText={setBudget}
+      />
 
       <TouchableOpacity style={styles.button} onPress={generatePlan}>
-        <Text style={styles.buttonText}>Generate Plan</Text>
+        <Text style={styles.buttonText}>Generate Top 3 Areas</Text>
       </TouchableOpacity>
 
-      {result && (
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Recommended Area: {result.area}</Text>
-          <Text>Rent: ₹{result.rent}</Text>
-          <Text>Food Cost: ₹{result.food}/month</Text>
-          <Text>Safety: {result.safety}</Text>
-          <Text>Metro: {result.metro}</Text>
-          <Text>💰 Savings: ₹{result.savings}/month</Text>
+      {results.map((item, index) => (
+        <View style={styles.card} key={index}>
+          <Text style={styles.cardTitle}>
+            {index + 1}. {item.area}
+          </Text>
+
+          <Text>Rent: ₹{item.rent}</Text>
+          <Text>Food Cost: ₹{item.food}/month</Text>
+          <Text>Safety: {item.safety}</Text>
+          <Text>Metro: {item.metro}</Text>
+          <Text>Score: {item.score}/100</Text>
+          <Text>💰 Savings: ₹{item.savings}/month</Text>
         </View>
-      )}
+      ))}
     </ScrollView>
   );
 }
@@ -106,7 +135,7 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    marginTop: 25,
+    marginTop: 20,
     padding: 18,
     borderRadius: 12,
     backgroundColor: "#F1F5F9",
