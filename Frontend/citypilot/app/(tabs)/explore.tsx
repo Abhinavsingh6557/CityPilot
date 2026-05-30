@@ -16,6 +16,7 @@ export default function AIAssistantScreen() {
   const [salary, setSalary] = useState("");
   const [budget, setBudget] = useState("");
   const [results, setResults] = useState<any[]>([]);
+  const [summary, setSummary] = useState("");
 
   const generatePlan = () => {
     const budgetValue = parseInt(budget);
@@ -40,6 +41,16 @@ export default function AIAssistantScreen() {
       });
 
     setResults(filteredAreas);
+
+    if (filteredAreas.length > 0) {
+      setSummary(
+        `Based on your salary of ₹${salaryValue} and budget of ₹${budgetValue}, ${filteredAreas[0].area} is the best option because it has a high score, affordable rent, and good savings potential.`
+      );
+    } else {
+      setSummary(
+        "No areas found under your budget. Try increasing your rent budget."
+      );
+    }
   };
 
   return (
@@ -80,18 +91,46 @@ export default function AIAssistantScreen() {
         <Text style={styles.buttonText}>Generate Top 3 Areas</Text>
       </TouchableOpacity>
 
+      {summary ? (
+        <View style={styles.summaryBox}>
+          <Text style={styles.summaryTitle}>🎯 Recommendation Summary</Text>
+          <Text>{summary}</Text>
+        </View>
+      ) : null}
+
       {results.map((item, index) => (
         <View style={styles.card} key={index}>
           <Text style={styles.cardTitle}>
-            {index + 1}. {item.area}
+            🏆 #{index + 1} {item.area}
           </Text>
 
-          <Text>Rent: ₹{item.rent}</Text>
-          <Text>Food Cost: ₹{item.food}/month</Text>
-          <Text>Safety: {item.safety}</Text>
-          <Text>Metro: {item.metro}</Text>
-          <Text>Score: {item.score}/100</Text>
-          <Text>💰 Savings: ₹{item.savings}/month</Text>
+          <Text style={styles.score}>⭐ Score: {item.score}/100</Text>
+
+          <Text style={styles.savings}>
+            💰 Savings: ₹{item.savings}/month
+          </Text>
+
+          <View style={styles.infoRow}>
+            <Text>🏠 Rent: ₹{item.rent}</Text>
+          </View>
+
+          <View style={styles.infoRow}>
+            <Text>🍽️ Food Cost: ₹{item.food}/month</Text>
+          </View>
+
+          <View style={styles.infoRow}>
+            <Text>🛡️ Safety: {item.safety}</Text>
+          </View>
+
+          <View style={styles.infoRow}>
+            <Text>🚇 Metro: {item.metro}</Text>
+          </View>
+
+          <View style={styles.reasonBox}>
+            <Text>✅ Affordable Rent</Text>
+            <Text>✅ Good Connectivity</Text>
+            <Text>✅ Suitable for Professionals</Text>
+          </View>
         </View>
       ))}
     </ScrollView>
@@ -134,16 +173,58 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
+  summaryBox: {
+    marginTop: 20,
+    padding: 15,
+    backgroundColor: "#DBEAFE",
+    borderRadius: 12,
+  },
+
+  summaryTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+
   card: {
     marginTop: 20,
     padding: 18,
     borderRadius: 12,
     backgroundColor: "#F1F5F9",
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
 
   cardTitle: {
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 10,
+  },
+
+  score: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#2563EB",
+    marginBottom: 8,
+  },
+
+  savings: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "green",
+    marginBottom: 12,
+  },
+
+  infoRow: {
+    marginBottom: 6,
+  },
+
+  reasonBox: {
+    marginTop: 12,
+    padding: 10,
+    backgroundColor: "#E0F2FE",
+    borderRadius: 8,
   },
 });
