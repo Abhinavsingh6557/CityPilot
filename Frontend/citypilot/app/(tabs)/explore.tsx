@@ -21,8 +21,26 @@ export default function AIAssistantScreen() {
   const generatePlan = () => {
     const budgetValue = parseInt(budget);
     const salaryValue = parseInt(salary);
+    const officeText = office.toLowerCase().trim().replace(/\s/g, "");
 
-    const filteredAreas = bangaloreData
+    const officeMatch = bangaloreData.find((item: any) =>
+      item.area.toLowerCase().replace(/\s/g, "").includes(officeText)
+    );
+
+    let recommendedAreas: any[] = [];
+
+    if (officeMatch) {
+      recommendedAreas = bangaloreData.filter((item: any) => {
+        const isSameArea = item.area === officeMatch.area;
+        const nearby = (officeMatch as any).nearby;
+        const isNearby = Array.isArray(nearby) && nearby.includes(item.area);
+        return isSameArea || isNearby;
+      });
+    } else {
+      recommendedAreas = bangaloreData;
+    }
+
+    const filteredAreas = recommendedAreas
       .filter((item: any) => {
         const minRent = parseInt(item.rent.split("-")[0]);
         return minRent <= budgetValue;
@@ -44,11 +62,11 @@ export default function AIAssistantScreen() {
 
     if (filteredAreas.length > 0) {
       setSummary(
-        `Based on your salary of ₹${salaryValue} and budget of ₹${budgetValue}, ${filteredAreas[0].area} is the best option because it has a high score, affordable rent, and good savings potential.`
+        `Based on your office location ${office || "Bangalore"}, salary of ₹${salaryValue}, and budget of ₹${budgetValue}, ${filteredAreas[0].area} is the best option because it is nearby, affordable, and has good savings potential.`
       );
     } else {
       setSummary(
-        "No areas found under your budget. Try increasing your rent budget."
+        "No nearby areas found under your budget. Try increasing your rent budget."
       );
     }
   };
@@ -127,9 +145,9 @@ export default function AIAssistantScreen() {
           </View>
 
           <View style={styles.reasonBox}>
-            <Text>✅ Affordable Rent</Text>
-            <Text>✅ Good Connectivity</Text>
-            <Text>✅ Suitable for Professionals</Text>
+            <Text>✅ Nearby to office area</Text>
+            <Text>✅ Affordable rent</Text>
+            <Text>✅ Suitable for professionals</Text>
           </View>
         </View>
       ))}
