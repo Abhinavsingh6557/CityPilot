@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
 import bangaloreData from "../../data/bangaloreAreas.json";
@@ -19,6 +20,11 @@ export default function AIAssistantScreen() {
   const [summary, setSummary] = useState("");
 
   const generatePlan = () => {
+    if (!city || !office || !salary || !budget) {
+      Alert.alert("Missing Information", "Please fill all fields.");
+      return;
+    }
+
     const budgetValue = parseInt(budget);
     const salaryValue = parseInt(salary);
     const officeText = office.toLowerCase().trim().replace(/\s/g, "");
@@ -45,29 +51,43 @@ export default function AIAssistantScreen() {
         const minRent = parseInt(item.rent.split("-")[0]);
         return minRent <= budgetValue;
       })
-      .sort((a: any, b: any) => b.score - a.score)
-      .slice(0, 3)
       .map((item: any) => {
         const minRent = parseInt(item.rent.split("-")[0]);
         const foodValue = parseInt(item.food);
         const savings = salaryValue - minRent - foodValue;
 
+        let score = 0;
+
+        if (minRent <= budgetValue) score += 40;
+
+        if (savings > 20000) score += 25;
+        else if (savings > 10000) score += 15;
+        else score += 5;
+
+        if (item.safety === "Excellent") score += 20;
+        else if (item.safety === "Very Good") score += 15;
+        else if (item.safety === "Good") score += 10;
+
+        if (item.metro === "Available") score += 10;
+        else if (item.metro === "Nearby") score += 7;
+
         return {
           ...item,
+          score,
           savings,
         };
-      });
+      })
+      .sort((a: any, b: any) => b.score - a.score)
+      .slice(0, 3);
 
     setResults(filteredAreas);
 
     if (filteredAreas.length > 0) {
       setSummary(
-        `Based on your office location ${office || "Bangalore"}, salary of ₹${salaryValue}, and budget of ₹${budgetValue}, ${filteredAreas[0].area} is the best option because it is nearby, affordable, and has good savings potential.`
+        `Based on your office location ${office}, salary of ₹${salaryValue}, and budget of ₹${budgetValue}, ${filteredAreas[0].area} is the best option because it gives better affordability, safety, and savings potential.`
       );
     } else {
-      setSummary(
-        "No nearby areas found under your budget. Try increasing your rent budget."
-      );
+      setSummary("No suitable areas found under your budget. Try increasing your rent budget.");
     }
   };
 
@@ -112,7 +132,7 @@ export default function AIAssistantScreen() {
       {summary ? (
         <View style={styles.summaryBox}>
           <Text style={styles.summaryTitle}>🎯 Recommendation Summary</Text>
-          <Text>{summary}</Text>
+          <Text style={styles.summaryText}>{summary}</Text>
         </View>
       ) : null}
 
@@ -122,32 +142,21 @@ export default function AIAssistantScreen() {
             🏆 #{index + 1} {item.area}
           </Text>
 
-          <Text style={styles.score}>⭐ Score: {item.score}/100</Text>
+          <Text style={styles.score}>⭐ Score: {item.score}/95</Text>
 
           <Text style={styles.savings}>
             💰 Savings: ₹{item.savings}/month
           </Text>
 
-          <View style={styles.infoRow}>
-            <Text>🏠 Rent: ₹{item.rent}</Text>
-          </View>
-
-          <View style={styles.infoRow}>
-            <Text>🍽️ Food Cost: ₹{item.food}/month</Text>
-          </View>
-
-          <View style={styles.infoRow}>
-            <Text>🛡️ Safety: {item.safety}</Text>
-          </View>
-
-          <View style={styles.infoRow}>
-            <Text>🚇 Metro: {item.metro}</Text>
-          </View>
+          <Text style={styles.info}>🏠 Rent: ₹{item.rent}</Text>
+          <Text style={styles.info}>🍽️ Food Cost: ₹{item.food}/month</Text>
+          <Text style={styles.info}>🛡️ Safety: {item.safety}</Text>
+          <Text style={styles.info}>🚇 Metro: {item.metro}</Text>
 
           <View style={styles.reasonBox}>
-            <Text>✅ Nearby to office area</Text>
             <Text>✅ Affordable rent</Text>
-            <Text>✅ Suitable for professionals</Text>
+            <Text>✅ Good savings potential</Text>
+            <Text>✅ Suitable for students and professionals</Text>
           </View>
         </View>
       ))}
@@ -204,6 +213,11 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
 
+  summaryText: {
+    fontSize: 15,
+    lineHeight: 22,
+  },
+
   card: {
     marginTop: 20,
     padding: 18,
@@ -235,7 +249,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
 
-  infoRow: {
+  info: {
     marginBottom: 6,
   },
 
