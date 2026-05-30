@@ -5,7 +5,8 @@
     "food": "3000",
     "safety": "Good",
     "metro": "Available",
-    "score": 95
+    "score": 95,
+    "nearby": ["Marathahalli", "Bellandur", "Brookefield"]
   },
   {
     "area": "HSR Layout",
@@ -13,7 +14,8 @@
     "food": "3500",
     "safety": "Very Good",
     "metro": "Nearby",
-    "score": 93
+    "score": 93,
+    "nearby": ["Koramangala", "BTM Layout", "Bellandur"]
   },
   {
     "area": "Electronic City",
@@ -21,7 +23,8 @@
     "food": "3000",
     "safety": "Good",
     "metro": "No",
-    "score": 85
+    "score": 85,
+    "nearby": ["HSR Layout", "BTM Layout", "Bommasandra"]
   },
   {
     "area": "Koramangala",
@@ -29,7 +32,8 @@
     "food": "4000",
     "safety": "Very Good",
     "metro": "Nearby",
-    "score": 90
+    "score": 90,
+    "nearby": ["HSR Layout", "BTM Layout", "Indiranagar"]
   },
   {
     "area": "Marathahalli",
@@ -37,7 +41,8 @@
     "food": "3500",
     "safety": "Good",
     "metro": "Available",
-    "score": 88
+    "score": 88,
+    "nearby": ["Whitefield", "Bellandur", "Brookefield"]
   },
   {
     "area": "BTM Layout",
@@ -45,7 +50,8 @@
     "food": "3200",
     "safety": "Good",
     "metro": "Nearby",
-    "score": 87
+    "score": 87,
+    "nearby": ["HSR Layout", "Koramangala", "Electronic City"]
   },
   {
     "area": "Indiranagar",
@@ -53,7 +59,8 @@
     "food": "4500",
     "safety": "Excellent",
     "metro": "Available",
-    "score": 92
+    "score": 92,
+    "nearby": ["Koramangala", "MG Road", "Domlur"]
   },
   {
     "area": "Bellandur",
@@ -61,7 +68,8 @@
     "food": "3500",
     "safety": "Good",
     "metro": "No",
-    "score": 84
+    "score": 84,
+    "nearby": ["Marathahalli", "Whitefield", "HSR Layout"]
   },
   {
     "area": "Hebbal",
@@ -69,7 +77,8 @@
     "food": "3500",
     "safety": "Good",
     "metro": "Nearby",
-    "score": 86
+    "score": 86,
+    "nearby": ["Yelahanka", "Manyata Tech Park", "Nagawara"]
   },
   {
     "area": "Yelahanka",
@@ -77,6 +86,7 @@
     "food": "3000",
     "safety": "Good",
     "metro": "No",
-    "score": 82
+    "score": 82,
+    "nearby": ["Hebbal", "Jakkur", "Airport Road"]
   }
 ]
