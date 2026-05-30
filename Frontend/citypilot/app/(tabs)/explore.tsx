@@ -38,7 +38,7 @@ export default function AIAssistantScreen() {
     if (officeMatch) {
       recommendedAreas = bangaloreData.filter((item: any) => {
         const isSameArea = item.area === officeMatch.area;
-        const nearby = (officeMatch as any).nearby;
+        const nearby = item.nearby;
         const isNearby = Array.isArray(nearby) && nearby.includes(item.area);
         return isSameArea || isNearby;
       });
@@ -87,7 +87,9 @@ export default function AIAssistantScreen() {
         `Based on your office location ${office}, salary of ₹${salaryValue}, and budget of ₹${budgetValue}, ${filteredAreas[0].area} is the best option because it gives better affordability, safety, and savings potential.`
       );
     } else {
-      setSummary("No suitable areas found under your budget. Try increasing your rent budget.");
+      setSummary(
+        "No suitable areas found under your budget. Try increasing your rent budget."
+      );
     }
   };
 
@@ -152,6 +154,14 @@ export default function AIAssistantScreen() {
           <Text style={styles.info}>🍽️ Food Cost: ₹{item.food}/month</Text>
           <Text style={styles.info}>🛡️ Safety: {item.safety}</Text>
           <Text style={styles.info}>🚇 Metro: {item.metro}</Text>
+
+          <View style={styles.budgetBox}>
+            <Text style={styles.budgetTitle}>📊 Monthly Budget Breakdown</Text>
+            <Text>💵 Salary: ₹{salary}</Text>
+            <Text>🏠 Rent: ₹{item.rent}</Text>
+            <Text>🍽️ Food: ₹{item.food}</Text>
+            <Text>💰 Estimated Savings: ₹{item.savings}</Text>
+          </View>
 
           <View style={styles.reasonBox}>
             <Text>✅ Affordable rent</Text>
@@ -250,6 +260,19 @@ const styles = StyleSheet.create({
   },
 
   info: {
+    marginBottom: 6,
+  },
+
+  budgetBox: {
+    marginTop: 12,
+    padding: 12,
+    backgroundColor: "#DCFCE7",
+    borderRadius: 8,
+  },
+
+  budgetTitle: {
+    fontWeight: "bold",
+    fontSize: 16,
     marginBottom: 6,
   },
 
