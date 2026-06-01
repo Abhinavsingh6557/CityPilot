@@ -52,10 +52,12 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: "#fff",
-  },
+  flex: 1,
+  paddingHorizontal: 20,
+  paddingTop: 60,
+  paddingBottom: 30,
+  backgroundColor: "#fff",
+},
 
   hero: {
     marginBottom: 25,
