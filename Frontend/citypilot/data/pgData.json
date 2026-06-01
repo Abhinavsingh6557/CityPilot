@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Whitefield Budget PG",
+    "area": "Whitefield",
+    "rent": "8500",
+    "food": "Included",
+    "type": "Boys/Girls",
+    "distanceFromOffice": "1-3 km"
+  },
+  {
+    "name": "BTM Student PG",
+    "area": "BTM Layout",
+    "rent": "8000",
+    "food": "Included",
+    "type": "Boys",
+    "distanceFromOffice": "5-8 km"
+  },
+  {
+    "name": "HSR Professional PG",
+    "area": "HSR Layout",
+    "rent": "11000",
+    "food": "Included",
+    "type": "Boys/Girls",
+    "distanceFromOffice": "4-6 km"
+  },
+  {
+    "name": "Electronic City PG",
+    "area": "Electronic City",
+    "rent": "7500",
+    "food": "Included",
+    "type": "Boys/Girls",
+    "distanceFromOffice": "1-4 km"
+  }
+]
