@@ -1,0 +1,26 @@
+[
+  {
+    "office": "Whitefield",
+    "stay": "BTM Layout",
+    "distance": "18 km",
+    "time": "45 mins",
+    "cost": "2500",
+    "transport": "Metro + Auto"
+  },
+  {
+    "office": "Whitefield",
+    "stay": "HSR Layout",
+    "distance": "15 km",
+    "time": "35 mins",
+    "cost": "2200",
+    "transport": "Metro + Bus"
+  },
+  {
+    "office": "Electronic City",
+    "stay": "BTM Layout",
+    "distance": "10 km",
+    "time": "25 mins",
+    "cost": "1500",
+    "transport": "Bus"
+  }
+]
