@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  SafeAreaView,
   ScrollView,
   View,
   Text,
@@ -93,110 +94,110 @@ export default function AIAssistantScreen() {
         `Based on your office location ${office}, salary of ₹${salaryValue}, and budget of ₹${budgetValue}, ${filteredAreas[0].area} is the best option because it gives better affordability, safety, and savings potential.`
       );
     } else {
-      setSummary(
-        "No suitable areas found under your budget. Try increasing your rent budget."
-      );
+      setSummary("No suitable areas found under your budget. Try increasing your rent budget.");
     }
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>🤖 CityPilot AI Assistant</Text>
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.title}>🤖 CityPilot AI Assistant</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Enter City (e.g. Bangalore)"
-        value={city}
-        onChangeText={setCity}
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="Enter City (e.g. Bangalore)"
+          value={city}
+          onChangeText={setCity}
+        />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Office Location"
-        value={office}
-        onChangeText={setOffice}
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="Office Location"
+          value={office}
+          onChangeText={setOffice}
+        />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Monthly Salary"
-        keyboardType="numeric"
-        value={salary}
-        onChangeText={setSalary}
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="Monthly Salary"
+          keyboardType="numeric"
+          value={salary}
+          onChangeText={setSalary}
+        />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Rent Budget"
-        keyboardType="numeric"
-        value={budget}
-        onChangeText={setBudget}
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="Rent Budget"
+          keyboardType="numeric"
+          value={budget}
+          onChangeText={setBudget}
+        />
 
-      <TouchableOpacity style={styles.button} onPress={generatePlan}>
-        <Text style={styles.buttonText}>Generate Top 3 Areas</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={generatePlan}>
+          <Text style={styles.buttonText}>Generate Top 3 Areas</Text>
+        </TouchableOpacity>
 
-      {summary ? (
-        <View style={styles.summaryBox}>
-          <Text style={styles.summaryTitle}>🎯 Recommendation Summary</Text>
-          <Text style={styles.summaryText}>{summary}</Text>
-        </View>
-      ) : null}
-
-      {results.map((item, index) => (
-        <View style={styles.card} key={index}>
-          <Text style={styles.cardTitle}>
-            🏆 #{index + 1} {item.area}
-          </Text>
-
-          <Text style={styles.score}>
-            ⭐ Relocation Score: {item.score}/95
-          </Text>
-
-          <View style={styles.scoreBox}>
-            <Text>🏠 Affordability: {item.rentScore}/40</Text>
-            <Text>💰 Savings: {item.savingsScore}/25</Text>
-            <Text>🛡️ Safety: {item.safetyScore}/20</Text>
-            <Text>🚇 Metro: {item.metroScore}/10</Text>
+        {summary ? (
+          <View style={styles.summaryBox}>
+            <Text style={styles.summaryTitle}>🎯 Recommendation Summary</Text>
+            <Text style={styles.summaryText}>{summary}</Text>
           </View>
+        ) : null}
 
-          <Text style={styles.savings}>
-            💰 Savings: ₹{item.savings}/month
-          </Text>
+        {results.map((item, index) => (
+          <View style={styles.card} key={index}>
+            <Text style={styles.cardTitle}>
+              🏆 #{index + 1} {item.area}
+            </Text>
 
-          <Text style={styles.info}>🏠 Rent: ₹{item.rent}</Text>
-          <Text style={styles.info}>🍽️ Food Cost: ₹{item.food}/month</Text>
-          <Text style={styles.info}>🛡️ Safety: {item.safety}</Text>
-          <Text style={styles.info}>🚇 Metro: {item.metro}</Text>
+            <Text style={styles.score}>⭐ Relocation Score: {item.score}/95</Text>
 
-          <View style={styles.budgetBox}>
-            <Text style={styles.budgetTitle}>📊 Monthly Budget Breakdown</Text>
-            <Text>💵 Salary: ₹{salary}</Text>
-            <Text>🏠 Rent: ₹{item.rent}</Text>
-            <Text>🍽️ Food: ₹{item.food}</Text>
-            <Text>💰 Estimated Savings: ₹{item.savings}</Text>
+            <View style={styles.scoreBox}>
+              <Text>🏠 Affordability: {item.rentScore}/40</Text>
+              <Text>💰 Savings: {item.savingsScore}/25</Text>
+              <Text>🛡️ Safety: {item.safetyScore}/20</Text>
+              <Text>🚇 Metro: {item.metroScore}/10</Text>
+            </View>
+
+            <Text style={styles.savings}>💰 Savings: ₹{item.savings}/month</Text>
+
+            <Text style={styles.info}>🏠 Rent: ₹{item.rent}</Text>
+            <Text style={styles.info}>🍽️ Food Cost: ₹{item.food}/month</Text>
+            <Text style={styles.info}>🛡️ Safety: {item.safety}</Text>
+            <Text style={styles.info}>🚇 Metro: {item.metro}</Text>
+
+            <View style={styles.budgetBox}>
+              <Text style={styles.budgetTitle}>📊 Monthly Budget Breakdown</Text>
+              <Text>💵 Salary: ₹{salary}</Text>
+              <Text>🏠 Rent: ₹{item.rent}</Text>
+              <Text>🍽️ Food: ₹{item.food}</Text>
+              <Text>💰 Estimated Savings: ₹{item.savings}</Text>
+            </View>
+
+            <View style={styles.reasonBox}>
+              <Text>✅ Affordable rent</Text>
+              <Text>✅ Good savings potential</Text>
+              <Text>✅ Suitable for students and professionals</Text>
+            </View>
           </View>
-
-          <View style={styles.reasonBox}>
-            <Text>✅ Affordable rent</Text>
-            <Text>✅ Good savings potential</Text>
-            <Text>✅ Suitable for students and professionals</Text>
-          </View>
-        </View>
-      ))}
-    </ScrollView>
+        ))}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+
   container: {
-  flex: 1,
-  paddingHorizontal: 20,
-  paddingTop: 60,
-  paddingBottom: 30,
-  backgroundColor: "#fff",
-},
+    paddingHorizontal: 20,
+    paddingTop: 25,
+    paddingBottom: 140,
+    backgroundColor: "#fff",
+  },
 
   title: {
     fontSize: 24,
