@@ -4,69 +4,109 @@
     "rent": "8000-10000",
     "food": "3000",
     "safety": "Good",
-    "metro": "Available"
+    "metro": "Available",
+    "travelCost": "1800",
+    "areaType": "IT Hub",
+    "bestFor": "IT employees and freshers",
+    "reason": "Best for people working near Whitefield because commute is low and rent is manageable."
   },
   {
     "area": "HSR Layout",
     "rent": "10000-12000",
     "food": "3500",
     "safety": "Very Good",
-    "metro": "Nearby"
+    "metro": "Nearby",
+    "travelCost": "2000",
+    "areaType": "Premium Residential",
+    "bestFor": "Students, professionals, startup employees",
+    "reason": "Good lifestyle, safety, food options and connectivity."
   },
   {
     "area": "Electronic City",
     "rent": "7000-9000",
     "food": "3000",
     "safety": "Good",
-    "metro": "No"
+    "metro": "No",
+    "travelCost": "1600",
+    "areaType": "IT Hub",
+    "bestFor": "IT employees with low budget",
+    "reason": "Affordable rent and suitable for people working in Electronic City."
   },
   {
     "area": "Koramangala",
     "rent": "12000-15000",
     "food": "4000",
     "safety": "Very Good",
-    "metro": "Nearby"
+    "metro": "Nearby",
+    "travelCost": "2500",
+    "areaType": "Lifestyle Area",
+    "bestFor": "Students, startup employees, social lifestyle",
+    "reason": "Good lifestyle and food options, but rent is slightly higher."
   },
   {
     "area": "Marathahalli",
     "rent": "9000-11000",
     "food": "3500",
     "safety": "Good",
-    "metro": "Available"
+    "metro": "Available",
+    "travelCost": "1700",
+    "areaType": "Budget IT Area",
+    "bestFor": "Freshers working near Whitefield or Bellandur",
+    "reason": "Balanced rent, food cost and connectivity for IT freshers."
   },
   {
     "area": "BTM Layout",
     "rent": "8000-10000",
     "food": "3200",
     "safety": "Good",
-    "metro": "Nearby"
+    "metro": "Nearby",
+    "travelCost": "1800",
+    "areaType": "Student Friendly",
+    "bestFor": "Students and bachelors",
+    "reason": "Affordable and student-friendly with good food options."
   },
   {
     "area": "Indiranagar",
     "rent": "15000-20000",
     "food": "4500",
     "safety": "Excellent",
-    "metro": "Available"
+    "metro": "Available",
+    "travelCost": "2800",
+    "areaType": "Premium Lifestyle",
+    "bestFor": "High salary professionals",
+    "reason": "Excellent lifestyle and safety, but expensive for low-budget users."
   },
   {
     "area": "Bellandur",
     "rent": "9000-12000",
     "food": "3500",
     "safety": "Good",
-    "metro": "No"
+    "metro": "No",
+    "travelCost": "2000",
+    "areaType": "IT Corridor",
+    "bestFor": "Professionals working near Bellandur or Outer Ring Road",
+    "reason": "Good option for ORR employees, but metro access is limited."
   },
   {
     "area": "Hebbal",
     "rent": "10000-13000",
     "food": "3500",
     "safety": "Good",
-    "metro": "Nearby"
+    "metro": "Nearby",
+    "travelCost": "2200",
+    "areaType": "Residential + Tech Area",
+    "bestFor": "Working professionals and families",
+    "reason": "Good residential area with decent connectivity."
   },
   {
     "area": "Yelahanka",
     "rent": "7000-9000",
     "food": "3000",
     "safety": "Good",
-    "metro": "No"
+    "metro": "No",
+    "travelCost": "2500",
+    "areaType": "Budget Residential",
+    "bestFor": "Low-budget users",
+    "reason": "Affordable rent, but commute may be longer for central Bangalore jobs."
   }
 ]
